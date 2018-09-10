@@ -1,0 +1,18 @@
+from sklearn import svm, datasets
+import pickle 
+import numpy as np
+
+# Load Sample data
+iris = datasets.load_iris()
+
+# Split loaded data into independent and target features
+X = iris.data  
+y = iris.target
+
+# Train Support Vector Machine (SVM) model with all data 
+svmModel = svm.SVC(kernel='poly', degree=3, C=1.0).fit(X, y)
+
+# Persist model so that it can be used by different consumers
+svmFile = open('SVMModel.pckl', 'wb')
+pickle.dump(svmModel, svmFile)
+svmFile.close()
